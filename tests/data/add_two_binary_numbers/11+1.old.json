@@ -1,0 +1,134 @@
+{
+  "machine": {
+    "blank": " ",
+    "start state": "right",
+    "final states": [
+      "done"
+    ],
+    "table": {
+      "right": {
+        "0": "R",
+        "1": "R",
+        "+": "R",
+        " ": {
+          "L": "read"
+        }
+      },
+      "read": {
+        "0": {
+          "write": "c",
+          "L": "have0"
+        },
+        "1": {
+          "write": "c",
+          "L": "have1"
+        },
+        "+": {
+          "write": " ",
+          "L": "rewrite"
+        }
+      },
+      "have0": {
+        "0": "L",
+        "1": "L",
+        "+": {
+          "L": "add0"
+        }
+      },
+      "have1": {
+        "0": "L",
+        "1": "L",
+        "+": {
+          "L": "add1"
+        }
+      },
+      "add0": {
+        "0": {
+          "write": "O",
+          "R": "back0"
+        },
+        " ": {
+          "write": "O",
+          "R": "back0"
+        },
+        "1": {
+          "write": "I",
+          "R": "back0"
+        },
+        "O": "L",
+        "I": "L"
+      },
+      "add1": {
+        "0": {
+          "write": "I",
+          "R": "back1"
+        },
+        " ": {
+          "write": "I",
+          "R": "back1"
+        },
+        "1": {
+          "write": "O",
+          "L": "carry"
+        },
+        "O": "L",
+        "I": "L"
+      },
+      "carry": {
+        "0": {
+          "write": "1",
+          "R": "back1"
+        },
+        " ": {
+          "write": "1",
+          "R": "back1"
+        },
+        "1": {
+          "write": "0",
+          "L": "carry"
+        }
+      },
+      "back0": {
+        "0": "R",
+        "1": "R",
+        "O": "R",
+        "I": "R",
+        "+": "R",
+        "c": {
+          "write": "0",
+          "L": "read"
+        }
+      },
+      "back1": {
+        "0": "R",
+        "1": "R",
+        "O": "R",
+        "I": "R",
+        "+": "R",
+        "c": {
+          "write": "1",
+          "L": "read"
+        }
+      },
+      "rewrite": {
+        "O": {
+          "write": "0",
+          "L": "rewrite"
+        },
+        "I": {
+          "write": "1",
+          "L": "rewrite"
+        },
+        "0": "L",
+        "1": "L",
+        " ": {
+          "R": "done"
+        }
+      },
+      "done": {}
+    }
+  },
+  "input": "11+1",
+  "output": "100 1",
+  "execution_history": []
+}
